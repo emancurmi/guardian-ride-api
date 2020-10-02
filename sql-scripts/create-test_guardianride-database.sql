@@ -1,0 +1,1 @@
+CREATE DATABASE test_guardianride OWNER =  gride PASSWORD = 'Gn4rd!4N'
