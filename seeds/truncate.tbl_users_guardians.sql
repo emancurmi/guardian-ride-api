@@ -1,0 +1,1 @@
+TRUNCATE tbl_users_guardians;

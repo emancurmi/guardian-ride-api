@@ -10,7 +10,6 @@ exampleRouter
     .route('/')
     .get((req, res, next) => {
         var qexampleid = req.query.exampleid || "";
-        //tutorialid 
         if (qexampleid != "") {
             ExampleServices.getAllExamplesbyexampleid(req.app.get('db'), qexampleid)
                 .then(steps => {
@@ -18,7 +17,6 @@ exampleRouter
                 })
                 .catch(next)
         }
-        //if its empty
         else {
             ExampleServices.getAllExamples(req.app.get('db'))
                 .then(steps => {

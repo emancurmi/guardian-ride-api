@@ -9,23 +9,29 @@ helpRouter
     .get((req, res, next) => {
         res.send('<h1>API Routes</h1></br>' +
 
-            '<h2>Steps Api</h2>' +
+            '<h2>Example Api</h2>' +
             '<p>' +
-            '/api/steps</br> ' +
-            '/api/steps/stepid </br>' +
-            '/api/steps/tutorialid </br>' +
+            '/api/example</br> ' +
+            '/api/example/exampleid </br>' +
             '</p>' +
 
-            '<h2>Tutorials</h2>' +
+            '<h2>Drinks Api</h2>' +
             '<p>' +
-            '/api/tutorials </br>' +
-            '/api/tutorials/id </br>' +
+            '/api/drinks</br> ' +
+            '/api/drinks/exampleid </br>' +
             '</p>' +
 
-            '<h2>Generate Tutorials</h2>' +
+            '<h2>Users Api</h2>' +
             '<p>' +
-            '/api/generatetutorial/tutorialid </br>' +
-            '</p>'
+            '/api/users</br> ' +
+            '/api/users/exampleid </br>' +
+            '</p>' +
+
+            '<h2>Guardians Api</h2>' +
+            '<p>' +
+            '/api/guardians</br> ' +
+            '/api/guardians/exampleid </br>' +
+            '</p>' 
         );
     })
 

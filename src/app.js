@@ -11,6 +11,13 @@ const app = express()
 const helpRouter = require('./help/help-router')
 const exampleRouter = require('./example/example-router')
 
+const drinkRouter = require('./drink/drink-router')
+const guardianRouter = require('./guardian/guardian-router')
+const userRouter = require('./user/user-router')
+
+const userdrinkRouter = require('./user_drink/user_drink-router')
+const userguardianRouter = require('./user_guardian/user_guardian-router')
+
 let whitelist = [
     'http://localhost:8000',
     'http://localhost:3000',
@@ -39,6 +46,13 @@ app.use(helmet())
 
 app.use('/api/help', helpRouter)
 app.use('/api/example', exampleRouter)
+
+app.use('/api/drink', drinkRouter)
+app.use('/api/guardian', guardianRouter)
+app.use('/api/user', userRouter)
+
+app.use('/api/user_drink', userdrinkRouter)
+app.use('/api/user_guardian', userguardianRouter)
 
 app.get('/', (req, res) => {
     res.send('Yippie!! Server Online in ' + NODE_ENV + ' mode!');
