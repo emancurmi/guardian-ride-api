@@ -23,7 +23,8 @@ describe('User Drink Endpoints', () => {
         it(`responds with 400 missing 'userid' if not supplied`, () => {
             const newUserDrinkMissingUserId= {
                 //userid: 2,
-                drinkid: 1
+                drinkid: 1,
+                userdrinktime: "12/3/20 12:30:39"
             }
             return supertest(app)
                 .post(`/api/user_drink`)
@@ -37,7 +38,8 @@ describe('User Drink Endpoints', () => {
         it('adds a new user drink to the store', () => {
             const newUserDrink = {
                 userid: 2,
-                drinkid: 1
+                drinkid: 1,
+                userdrinktime: "12/3/20 12:30:39"
             }
             return supertest(app)
                 .post(`/api/user_drink`)
@@ -47,6 +49,7 @@ describe('User Drink Endpoints', () => {
                 .expect(res => {
                     expect(res.body.userid).to.eql(newUserDrink.userid)
                     expect(res.body.drinkid).to.eql(newUserDrink.drinkid)
+                    expect(res.body.userdrinktime).to.eql(newUserDrink.userdrinktime)
 
                     expect(res.body).to.have.property('userdrinkid')
                     expect(res.headers.location).to.eql(`/api/user_drink/${res.body.userdrinkid}`)

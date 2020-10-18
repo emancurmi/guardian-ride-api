@@ -3,8 +3,12 @@ const DrinkServices = {
         return knex.select('*').from('tbl_drinks')
     },
 
-    getById(knex, drinkid) {
+    getDrinkById(knex, drinkid) {
         return knex.from('tbl_drinks').select('*').where('drinkid', drinkid).first()
+    },
+
+    getDrinkByName(knex, drinkname) {
+        return knex.from('tbl_drinks').select('*').where('drinkname', drinkname).first()
     },
 
     insertDrink(knex, newdrink) {

@@ -8,16 +8,37 @@ const jsonParser = express.json()
 userdrinkRouter
     .route('/')
     .get((req, res, next) => {
-        UserDrinkServices.getAllUserDrinks(req.app.get('db'))
-            .then(users => {
-                res.json(users)
-            })
-            .catch(next)
+
+        var quserid = req.query.userid || "";
+        var qstart = req.query.start || "";
+        var qend = req.query.end || "";
+
+        if (quserid != "") {
+            UserDrinkServices.getByUserId(req.app.get('db'), quserid)
+                .then(userdrink => {
+                    res.json(userdrink)
+                })
+                .catch(next)
+        }
+        else if (qstart != "") {
+            UserDrinkServices.getTodaysDrinksByUserId(req.app.get('db'), quserid, qstart, qend)
+                .then(userdrink => {
+                    res.json(userdrink)
+                })
+                .catch(next)
+        }
+        else {
+            UserDrinkServices.getAllUserDrinks(req.app.get('db'))
+                .then(userdrink => {
+                    res.json(userdrink)
+                })
+                .catch(next)
+        }
     })
 
     .post(jsonParser, (req, res, next) => {
-        const { userid, drinkid } = req.body
-        const newUserDrink = { userid, drinkid }
+        const { userid, drinkid, userdrinktime } = req.body
+        const newUserDrink = { userid, drinkid, userdrinktime}
 
         for (const [key, value] of Object.entries(newUserDrink)) {
             if (value == null) {
@@ -67,6 +88,7 @@ userdrinkRouter
             userdrinkid: res.userdrink.userdrinkid,
             userid: res.userdrink.userid,
             drinkid: res.userdrink.drinkid,
+            userdrinktime: res.userdrink.userdrinktime
         })
     })
 

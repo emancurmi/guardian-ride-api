@@ -8,11 +8,32 @@ const jsonParser = express.json()
 drinkRouter
     .route('/')
     .get((req, res, next) => {
-        DrinkServices.getAllDrinks(req.app.get('db'))
-            .then(drinks => {
-                res.json(drinks)
-            })
-            .catch(next)
+        var qdrinkname = req.query.drinkname || "";
+        var qdrinkid = req.query.drinkid || "";
+
+        if (qdrinkid != "") {
+            DrinkServices.getDrinkById(req.app.get('db'), qdrinkid)
+                .then(drink => {
+                    res.json(drink)
+                })
+                .catch(next)
+        }
+
+        else if (qdrinkname != "") {
+            DrinkServices.getDrinkByName(req.app.get('db'), qdrinkname)
+                .then(drink => {
+                    res.json(drink)
+                })
+                .catch(next)
+        }
+
+        else {
+            DrinkServices.getAllDrinks(req.app.get('db'))
+                .then(drinks => {
+                    res.json(drinks)
+                })
+                .catch(next)
+        }
     })
 
     .post(jsonParser, (req, res, next) => {
@@ -48,7 +69,7 @@ drinkRouter
     .route('/:drinkid')
 
     .all((req, res, next) => {
-        DrinkServices.getById(
+        DrinkServices.getDrinkById(
             req.app.get('db'),
             req.params.drinkid
         )

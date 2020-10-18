@@ -4,7 +4,15 @@ const UserDrinkServices = {
     },
 
     getById(knex, userdrinkid) {
-        return knex.from('tbl_user_drinks').select('*').where('userdrinkid', userdrinkid).first()
+        return knex.from('tbl_user_drinks').select('*').where('userdrinkid', userdrinkid)
+    },
+
+    getByUserId(knex, userid) {
+        return knex.from('tbl_user_drinks').select('*').where('userid', userid)
+    },
+
+    getTodaysDrinksByUserId(knex, userid, start, end) {
+        return knex.from('tbl_user_drinks').select('*').where('userid', userid).whereBetween('userdrinktime', [start, end])
     },
 
     insertUserDrink(knex, newuserdrink) {

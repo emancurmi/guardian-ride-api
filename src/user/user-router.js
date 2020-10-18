@@ -8,11 +8,29 @@ const jsonParser = express.json()
 userRouter
     .route('/')
     .get((req, res, next) => {
-        UserServices.getAllUsers(req.app.get('db'))
-            .then(users => {
-                res.json(users)
-            })
-            .catch(next)
+        var quserphone = req.query.userphone || "";
+        var quserpin = req.query.userpin || "";
+
+        if (quserphone != "") {
+            if (quserpin != "") {
+                UserServices.getByUserPhone(req.app.get('db'), quserphone, quserpin)
+                    .then(users => {
+                        res.json(users)
+                    })
+                    .catch(next)
+            }
+            else {
+                throw Error("Pin is rquired");
+            }
+        }
+        else {
+
+            UserServices.getAllUsers(req.app.get('db'))
+                .then(users => {
+                    res.json(users)
+                })
+                .catch(next)
+        }
     })
 
     .post(jsonParser, (req, res, next) => {

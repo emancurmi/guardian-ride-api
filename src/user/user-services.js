@@ -7,14 +7,23 @@ const UserServices = {
         return knex.from('tbl_users').select('*').where('userid', userid).first()
     },
 
+    getByUserPhone(knex, userphone, userpin) {
+        return knex.from('tbl_users').select('*').where('userphone', userphone).where('userpin', userpin)
+    },
+
     insertUser(knex, newuser) {
-        return knex
-            .insert(newuser)
-            .into('tbl_users')
-            .returning('*')
-            .then(rows => {
-                return rows[0]
-            })
+        if (!this.getByUserPhone(knex, newuser.userphone)) {
+            return knex
+                .insert(newuser)
+                .into('tbl_users')
+                .returning('*')
+                .then(rows => {
+                    return rows[0]
+                })
+        }
+        else {
+            throw Error("Phonenumber is alread in use");
+        }
     },
 
     deleteUser(knex, userid) {

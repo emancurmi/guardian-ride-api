@@ -21,8 +21,8 @@ const userguardianRouter = require('./user_guardian/user_guardian-router')
 let whitelist = [
     'http://localhost:8000',
     'http://localhost:3000',
-    'https://logixion-app.vercel.app',
-    'https://logixon.herokuapp.com']
+    'https://guardianride-app.vercel.app',
+    'https://guardianride.herokuapp.com']
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
