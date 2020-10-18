@@ -3,6 +3,6 @@ module.exports = {
     PORT: process.env.PORT || 8000,
     NODE_ENV: process.env.NODE_ENV || 'production',
     API_TOKEN: process.env.API_TOKEN || '7b967bbe-afc2-11ea-b3de-0242ac130004',
-    DB_URL: process.env.DB_URL || 'postgres://ftglhjsxmnzoox:a63c871ad4e2650b3de5ba5465847a1cc780dcb2e2fc8dd2db686999055d4bce@ec2-34-192-173-173.compute-1.amazonaws.com:5432/d5iaacb6ts91n8',
-    DATABASE_URL: process.env.DATABASE_URL || 'postgres://ftglhjsxmnzoox:a63c871ad4e2650b3de5ba5465847a1cc780dcb2e2fc8dd2db686999055d4bce@ec2-34-192-173-173.compute-1.amazonaws.com:5432/d5iaacb6ts91n8',
+    DB_URL: process.env.DB_URL || 'postgres://tebymszlqvkfmh:b906bfac8291d770e0e2b88a37f403bf10ccd20cb9ba8fb72b6728fddc699255@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d92tfic84kr9fc',
+    DATABASE_URL: process.env.DATABASE_URL || 'postgres://tebymszlqvkfmh:b906bfac8291d770e0e2b88a37f403bf10ccd20cb9ba8fb72b6728fddc699255@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d92tfic84kr9fc',
 }
