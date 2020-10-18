@@ -28,6 +28,12 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
 }))
 
+app.all('*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
 //app.use(cors({
 //    origin: function (origin, callback) {
 //        // allow requests with no origin 
@@ -40,11 +46,6 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 //        return callback(null, true);
 //    }
 //}));
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
 
 app.use(helmet())
 //app.use(validateBearerToken)
