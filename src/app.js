@@ -28,18 +28,23 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
 }))
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin 
-        if (!origin) return callback(null, true);
-        if (whitelist.indexOf(origin) === -1) {
-            var message = `The CORS policy for this origin doesn't ` +
-                `allow access from the particular origin.`;
-            return callback(new Error(message), false);
-        }
-        return callback(null, true);
-    }
-}));
+//app.use(cors({
+//    origin: function (origin, callback) {
+//        // allow requests with no origin 
+//        if (!origin) return callback(null, true);
+//        if (whitelist.indexOf(origin) === -1) {
+//            var message = `The CORS policy for this origin doesn't ` +
+//                `allow access from the particular origin.`;
+//            return callback(new Error(message), false);
+//        }
+//        return callback(null, true);
+//    }
+//}));
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 app.use(helmet())
 //app.use(validateBearerToken)
