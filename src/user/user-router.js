@@ -24,7 +24,6 @@ userRouter
             }
         }
         else {
-
             UserServices.getAllUsers(req.app.get('db'))
                 .then(users => {
                     res.json(users)
