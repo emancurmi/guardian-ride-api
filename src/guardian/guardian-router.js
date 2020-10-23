@@ -8,11 +8,21 @@ const jsonParser = express.json()
 guardianRouter
     .route('/')
     .get((req, res, next) => {
-        GuardianServices.getAllGuardians(req.app.get('db'))
-            .then(guardian => {
-                res.json(guardian)
-            })
-            .catch(next)
+        var quserid = req.query.userid || "";
+        if (quserid != "") {
+            GuardianServices.getByUserId(req.app.get('db'), quserid)
+                .then(guardian => {
+                    res.json(guardian)
+                })
+                .catch(next)
+        }
+        else {
+            GuardianServices.getAllGuardians(req.app.get('db'))
+                .then(guardian => {
+                    res.json(guardian)
+                })
+                .catch(next)
+        }
     })
 
     .post(jsonParser, (req, res, next) => {

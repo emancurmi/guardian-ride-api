@@ -7,6 +7,10 @@ const GuardianServices = {
         return knex.from('tbl_guardians').select('*').where('guardianid', guardianid).first()
     },
 
+    getByUserId(knex, guardianid) {
+        return knex.from('tbl_guardians').select('*').where('userid', userid).first()
+    },
+
     insertGuardian(knex, newguardian) {
         return knex
             .insert(newguardian)
