@@ -24,7 +24,7 @@ describe('User Drink Endpoints', () => {
             const newUserDrinkMissingUserId= {
                 //userid: 2,
                 drinkid: 1,
-                userdrinktime: "12/3/20 12:30:39"
+                userdrinktime: '12/3/20 12:30:39'
             }
             return supertest(app)
                 .post(`/api/user_drink`)
@@ -39,7 +39,7 @@ describe('User Drink Endpoints', () => {
             const newUserDrink = {
                 userid: 2,
                 drinkid: 1,
-                userdrinktime: "12/3/20 12:30:39"
+                userdrinktime: "12-3-20 12:30:39"
             }
             return supertest(app)
                 .post(`/api/user_drink`)

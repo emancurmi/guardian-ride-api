@@ -11,8 +11,12 @@ const UserServices = {
         return knex.from('tbl_users').select('*').where('userphone', userphone).where('userpin', userpin)
     },
 
+    getByUserPhoneOnly(knex, userphone) {
+        return knex.from('tbl_users').select('*').where('userphone', userphone)
+    },
+
     insertUser(knex, newuser) {
-        if (!this.getByUserPhone(knex, newuser.userphone)) {
+        if (this.getByUserPhoneOnly(knex, newuser.userphone) != []) {
             return knex
                 .insert(newuser)
                 .into('tbl_users')
@@ -22,7 +26,7 @@ const UserServices = {
                 })
         }
         else {
-            throw Error("Phonenumber is alread in use");
+            throw Error("Phone number is alread in use");
         }
     },
 
