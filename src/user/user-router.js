@@ -99,7 +99,7 @@ userRouter
             .catch(next)
     })
 
-    .patch(jsonParser, (req, res, next) => {
+    .patch((req, res, next) => {
         const { username, userphone, userpin } = req.body
         const userToUpdate = { username, userphone, userpin }
         const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
