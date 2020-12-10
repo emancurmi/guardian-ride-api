@@ -1,17 +1,28 @@
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: '127.0.0.1',
+        user: 'your_database_user',
+        password: 'your_database_password',
+        database: 'myapp_test'
+    }
+});
+
 const UserGuardianServices = {
-    getAllUserGuardians(knex) {
+
+    getAllUserGuardians() {
         return knex.select('*').from('tbl_user_guardians')
     },
 
-    getById(knex, userguardianid) {
+    getById(userguardianid) {
         return knex.from('tbl_user_guardians').select('*').where('userguardianid', userguardianid).first()
     },
 
-    getByUserId(knex, userid) {
+    getByUserId(userid) {
         return knex.from('tbl_user_guardians').select('*').where('userid', userid).first()
     },
 
-    insertUserGuardian(knex, newuserguardian) {
+    insertUserGuardian(newuserguardian) {
         return knex
             .insert(newuserguardian)
             .into('tbl_user_guardians')
@@ -21,13 +32,13 @@ const UserGuardianServices = {
             })
     },
 
-    deleteUserGuardian(knex, userguardianid) {
+    deleteUserGuardian(userguardianid) {
         return knex('tbl_user_guardians')
             .where({ userguardianid })
             .delete()
     },
 
-    updateUserGuardian(knex, userguardianid, newuserguardianfields) {
+    updateUserGuardian(userguardianid, newuserguardianfields) {
         return knex('tbl_user_guardians')
             .where({ userguardianid })
             .update(newuserguardianfields)
