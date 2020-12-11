@@ -22,7 +22,7 @@ let whitelist = [
     'http://localhost:8000',
     'http://localhost:3000',
     'https://guardian-ride-app.vercel.app',
-    'https://guardian-ride-app.herokuapp.com']
+    'https://guardian-ride-api.herokuapp.com']
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
@@ -44,15 +44,15 @@ app.use(cors({
 app.use(helmet())
 //app.use(validateBearerToken)
 
-//app.use('/api/help', helpRouter)
-//app.use('/api/example', exampleRouter)
+app.use('/api/help', helpRouter)
+app.use('/api/example', exampleRouter)
 
-//app.use('/api/drink', drinkRouter)
-//app.use('/api/guardian', guardianRouter)
-//app.use('/api/user', userRouter)
+app.use('/api/drink', drinkRouter)
+app.use('/api/guardian', guardianRouter)
+app.use('/api/user', userRouter)
 
-//app.use('/api/user_drink', userdrinkRouter)
-//app.use('/api/user_guardian', userguardianRouter)
+app.use('/api/user_drink', userdrinkRouter)
+app.use('/api/user_guardian', userguardianRouter)
 
 app.get('/', (req, res) => {
     res.send('Yippie!! Server Online in ' + NODE_ENV + ' mode!');
