@@ -11,8 +11,11 @@ const UserDrinkServices = {
         return knex.from('tbl_user_drinks').select('*').where('userid', userid)
     },
 
-    getTodaysDrinksByUserId(knex, userid, start, end) {
-        return knex.from('tbl_user_drinks').select('*').where('userid', userid).whereBetween('userdrinktime', [start, end])
+    getTodaysDrinksByUserId(knex, userid, start) {
+        return knex.from('tbl_user_drinks')
+            .select('*')
+            .where('userid', userid)
+            .where('userdrinktime', '>', start )
     },
 
     insertUserDrink(knex, newuserdrink) {

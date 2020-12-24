@@ -20,11 +20,12 @@ describe('User Drink Endpoints', () => {
     afterEach('cleanup', () => db('tbl_user_drinks').truncate())
 
     describe('POST /api/user_drink', () => {
+
         it(`responds with 400 missing 'userid' if not supplied`, () => {
             const newUserDrinkMissingUserId= {
                 //userid: 2,
                 drinkid: 1,
-                userdrinktime: '12/3/20 12:30:39'
+                userdrinktime: '2020-03-12 16:30:39'
             }
             return supertest(app)
                 .post(`/api/user_drink`)
@@ -39,7 +40,7 @@ describe('User Drink Endpoints', () => {
             const newUserDrink = {
                 userid: 2,
                 drinkid: 1,
-                userdrinktime: "12-3-20 12:30:39"
+                userdrinktime: '2020-03-12 16:30:39'
             }
             return supertest(app)
                 .post(`/api/user_drink`)
@@ -49,7 +50,7 @@ describe('User Drink Endpoints', () => {
                 .expect(res => {
                     expect(res.body.userid).to.eql(newUserDrink.userid)
                     expect(res.body.drinkid).to.eql(newUserDrink.drinkid)
-                    expect(res.body.userdrinktime).to.eql(newUserDrink.userdrinktime)
+                    expect(res.body.userdrinktime).to.eql('2020-03-12T20:30:39.000Z')
 
                     expect(res.body).to.have.property('userdrinkid')
                     expect(res.headers.location).to.eql(`/api/user_drink/${res.body.userdrinkid}`)

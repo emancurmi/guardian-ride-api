@@ -8,24 +8,27 @@ const jsonParser = express.json()
 userdrinkRouter
     .route('/')
     .get((req, res, next) => {
-
         var quserid = req.query.userid || "";
         var qstart = req.query.start || "";
-        var qend = req.query.end || "";
+
+        console.log("starting user drink eval")
 
         if (quserid != "") {
+            console.log("starting user eval")
             UserDrinkServices.getByUserId(req.app.get('db'), quserid)
                 .then(userdrink => {
                     res.json(userdrink)
                 })
                 .catch(next)
-        }
-        else if (qstart != "") {
-            UserDrinkServices.getTodaysDrinksByUserId(req.app.get('db'), quserid, qstart, qend)
-                .then(userdrink => {
-                    res.json(userdrink)
-                })
-                .catch(next)
+
+            if (qstart != "") {
+                console.log("starting user drink with date eval")
+                UserDrinkServices.getTodaysDrinksByUserId(req.app.get('db'), quserid, qstart)
+                    .then(userdrink => {
+                        res.json(userdrink)
+                    })
+                    .catch(next)
+            }
         }
         else {
             UserDrinkServices.getAllUserDrinks(req.app.get('db'))
