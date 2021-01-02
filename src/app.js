@@ -22,7 +22,7 @@ let whitelist = [
     'http://localhost:8000',
     'http://localhost:3000',
     'https://guardian-ride-app.vercel.app',
-    'https://guardian-ride-api.herokuapp.com']
+    'https://guardian-ride-api.herokuapp.com/']
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test'
