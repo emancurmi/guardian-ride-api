@@ -26,7 +26,7 @@ const UserServices = {
                 })
         }
         else {
-            throw Error("Phone number is alread in use");
+            throw Error("Phone number is already in use");
         }
     },
 
