@@ -16,18 +16,13 @@ const UserServices = {
     },
 
     insertUser(knex, newuser) {
-        if (this.getByUserPhoneOnly(knex, newuser.userphone) != []) {
-            return knex
-                .insert(newuser)
-                .into('tbl_users')
-                .returning('*')
-                .then(rows => {
-                    return rows[0]
-                })
-        }
-        else {
-            throw Error("Phone number is already in use");
-        }
+        return knex
+            .insert(newuser)
+            .into('tbl_users')
+            .returning('*')
+            .then(rows => {
+                return rows[0]
+            })
     },
 
     deleteUser(knex, userid) {

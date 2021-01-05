@@ -43,14 +43,14 @@ userRouter
                 })
             }
         }
-
-        const founduser = UserServices.getByUserPhone(newUser.userphone);
-        if (!founduser) {
-
-            UserServices.insertUser(
-                req.app.get('db'),
-                newUser
-            )
+        const founduser = null;
+        UserServices.getByUserPhoneOnly(req.app.get('db'), newUser.userphone)
+            .then(users => {
+                this.founduser = users;
+            })
+        console.log(founduser);
+        if (founduser === null) {
+            UserServices.insertUser(req.app.get('db'), newUser)
                 .then(user => {
                     res
                         .status(201)
@@ -59,11 +59,8 @@ userRouter
                 })
                 .catch(next)
         }
-
         else {
-            return res.status(400).json({
-                error: { message: `User is already registered!` }
-            })
+            throw Error("User is already registered!");
         }
     })
 
