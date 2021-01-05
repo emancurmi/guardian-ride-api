@@ -44,18 +44,27 @@ userRouter
             }
         }
 
-        newUser.username = username
-        UserServices.insertUser(
-            req.app.get('db'),
-            newUser
-        )
-            .then(user => {
-                res
-                    .status(201)
-                    .location(path.posix.join(req.originalUrl + `/${user.userid}`))
-                    .json(user)
+        const founduser = UserServices.getByUserPhone(newUser.userphone);
+        if (!founduser) {
+
+            UserServices.insertUser(
+                req.app.get('db'),
+                newUser
+            )
+                .then(user => {
+                    res
+                        .status(201)
+                        .location(path.posix.join(req.originalUrl + `/${user.userid}`))
+                        .json(user)
+                })
+                .catch(next)
+        }
+
+        else {
+            return res.status(400).json({
+                error: { message: `User is already registered!` }
             })
-            .catch(next)
+        }
     })
 
 userRouter

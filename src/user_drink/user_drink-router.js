@@ -51,7 +51,6 @@ userdrinkRouter
             }
         }
 
-        newUserDrink.userid = userid
         UserDrinkServices.insertUserDrink(
             req.app.get('db'),
             newUserDrink

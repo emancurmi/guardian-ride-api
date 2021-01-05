@@ -32,13 +32,13 @@ const UserServices = {
 
     deleteUser(knex, userid) {
         return knex('tbl_users')
-            .where({ userid })
+            .where('userid', userid )
             .delete()
     },
 
     updateUser(knex, userid, newuserfields) {
         return knex('tbl_users')
-            .where({ userid })
+            .where('userid', userid)
             .update(newuserfields)
     },
 }

@@ -45,7 +45,7 @@ userguardianRouter
             .then(userguardian => {
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalUrl + `/${userguardian.userguardianid}`))
+                    .location(path.posix.join(req.originalUrl + `/${userguardian.userguardiansid}`))
                     .json(userguardian)
             })
             .catch(next)
@@ -53,12 +53,12 @@ userguardianRouter
 
 userguardianRouter
 
-    .route('/:userguardianid')
+    .route('/:userguardiansid')
 
     .all((req, res, next) => {
         UserGuardianServices.getById(
             req.app.get('db'),
-            req.params.userguardianid
+            req.params.userguardiansid
         )
             .then(userguardian => {
                 if (!userguardian) {
@@ -74,7 +74,7 @@ userguardianRouter
 
     .get((req, res, next) => {
         res.json({
-            userguardianid: res.userguardian.userguardianid,
+            userguardiansid: res.userguardian.userguardiansid,
             userid: res.userguardian.userid,
             guardianid: res.userguardian.guardianid
         })
@@ -83,7 +83,7 @@ userguardianRouter
     .delete((req, res, next) => {
         UserGuardianServices.deleteUserGuardian(
             req.app.get('db'),
-            req.params.userguardianid
+            req.params.userguardiansid
         )
             .then(() => {
                 res.status(204).end()
@@ -105,7 +105,7 @@ userguardianRouter
 
         UserGuardianServices.updateUserGuardian(
             req.app.get('db'),
-            req.params.userguardianid,
+            req.params.userguardiansid,
             userguardianToUpdate
         )
             .then(numRowsAffected => {
