@@ -57,7 +57,7 @@ userguardianRouter
     .all((req, res, next) => {
         UserGuardianServices.getById(req.app.get('db'), req.params.userguardiansid)
             .then(userguardian => {
-                console.log(userguardian);
+                //console.log(userguardian);
                 if (!userguardian) {
                     return res.status(404).json({
                         error: { message: `User Guardian link doesn't exist` }

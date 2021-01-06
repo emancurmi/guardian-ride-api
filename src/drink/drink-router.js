@@ -40,7 +40,7 @@ drinkRouter
         const { drinkname, drinkalcoholvalue } = req.body
         const newDrink = { drinkname, drinkalcoholvalue }
 
-        console.log(newDrink);
+        //console.log(newDrink);
 
         for (const [key, value] of Object.entries(newDrink)) {
             if (value == null) {

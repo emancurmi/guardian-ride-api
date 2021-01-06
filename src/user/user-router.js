@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
 const UserServices = require('./user-services')
+const { exception } = require('console')
+const { query } = require('express')
 
 const userRouter = express.Router()
 const jsonParser = express.json()
@@ -44,25 +46,26 @@ userRouter
             }
         }
 
-        const founduser = 0;
         UserServices.getByUserPhoneOnly(req.app.get('db'), newUser.userphone)
-            .then(users => {
-                this.founduser = users.length;
-            })
+            .then(user => {
 
-        if (founduser <= 0) {
-            UserServices.insertUser(req.app.get('db'), newUser)
-                .then(user => {
-                    res
-                        .status(201)
-                        .location(path.posix.join(req.originalUrl + `/${user.userid}`))
-                        .json(user)
-                })
-                .catch(next)
-        }
-        else {
-            throw Error("User is already registered!");
-        }
+                if (user === null) {
+                    UserServices.insertUser(req.app.get('db'), newUser)
+                        .then(user => {
+                            res
+                                .status(201)
+                                .location(path.posix.join(req.originalUrl + `/${user.userid}`))
+                                .json(user)
+                        })
+                        .catch(next)
+                }
+                else {
+                    return res.status(400).json({
+                        error: { message: `Phone Number is Registered` }
+                    })
+
+                }
+            })
     })
 
 userRouter
@@ -104,7 +107,7 @@ userRouter
     })
 
     .patch(jsonParser, (req, res, next) => {
-        console.log(req.body)
+        //console.log(req.body)
         const { username, userphone, userpin } = req.body
         const userToUpdate = { username, userphone, userpin }
         const numberOfValues = Object.values(userToUpdate).filter(Boolean).length

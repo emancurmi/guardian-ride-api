@@ -95,8 +95,8 @@ describe('User Drink Endpoints', () => {
         context('Given there are drinks in the database', () => {
             const testUserDrinks = fixtures.makeUserDrinksArray()
             const resultUserDrinks = fixtures.resultsUserDrinksArray()
-            console.log(testUserDrinks[0])
-            console.log(resultUserDrinks[0])
+            //console.log(testUserDrinks[0])
+            //console.log(resultUserDrinks[0])
             beforeEach('insert user drinks', () => {
                 return db
                     .into('tbl_user_drinks')

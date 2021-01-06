@@ -11,10 +11,10 @@ userdrinkRouter
         var quserid = req.query.userid || "";
         var qstart = req.query.start || "";
 
-        console.log("starting user drink eval")
+        //console.log("starting user drink eval")
 
         if (quserid != "") {
-            console.log("starting user eval")
+            //console.log("starting user eval")
             UserDrinkServices.getByUserId(req.app.get('db'), quserid)
                 .then(userdrink => {
                     res.json(userdrink)
@@ -22,7 +22,7 @@ userdrinkRouter
                 .catch(next)
 
             if (qstart != "") {
-                console.log("starting user drink with date eval")
+                //console.log("starting user drink with date eval")
                 UserDrinkServices.getTodaysDrinksByUserId(req.app.get('db'), quserid, qstart)
                     .then(userdrink => {
                         res.json(userdrink)
