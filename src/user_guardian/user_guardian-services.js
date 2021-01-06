@@ -4,8 +4,8 @@ const UserGuardianServices = {
         return knex.select('*').from('tbl_user_guardians')
     },
 
-    getById(knex, userguardianid) {
-        return knex.from('tbl_user_guardians').select('*').where('userguardianid', userguardianid).first()
+    getById(knex, userguardiansid) {
+        return knex.from('tbl_user_guardians').select('*').where('userguardiansid', userguardiansid).first()
     },
 
     getByUserId(knex, userid) {
@@ -22,15 +22,15 @@ const UserGuardianServices = {
             })
     },
 
-    deleteUserGuardian(knex, userguardianid) {
+    deleteUserGuardian(knex, userguardiansid) {
         return knex('tbl_user_guardians')
-            .where({ userguardianid })
+            .where({ userguardiansid })
             .delete()
     },
 
-    updateUserGuardian(knex, userguardianid, newuserguardianfields) {
+    updateUserGuardian(knex, userguardiansid, newuserguardianfields) {
         return knex('tbl_user_guardians')
-            .where({ userguardianid })
+            .where({ userguardiansid })
             .update(newuserguardianfields)
     },
 }

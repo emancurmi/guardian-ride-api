@@ -43,13 +43,14 @@ userRouter
                 })
             }
         }
-        const founduser = null;
+
+        const founduser = 0;
         UserServices.getByUserPhoneOnly(req.app.get('db'), newUser.userphone)
             .then(users => {
-                this.founduser = users;
+                this.founduser = users.length;
             })
-        console.log(founduser);
-        if (founduser === null) {
+
+        if (founduser <= 0) {
             UserServices.insertUser(req.app.get('db'), newUser)
                 .then(user => {
                     res
@@ -69,10 +70,7 @@ userRouter
     .route('/:userid')
 
     .all((req, res, next) => {
-        UserServices.getById(
-            req.app.get('db'),
-            req.params.userid
-        )
+        UserServices.getById( req.app.get('db'), req.params.userid )
             .then(user => {
                 if (!user) {
                     return res.status(404).json({
@@ -105,7 +103,8 @@ userRouter
             .catch(next)
     })
 
-    .patch((req, res, next) => {
+    .patch(jsonParser, (req, res, next) => {
+        console.log(req.body)
         const { username, userphone, userpin } = req.body
         const userToUpdate = { username, userphone, userpin }
         const numberOfValues = Object.values(userToUpdate).filter(Boolean).length

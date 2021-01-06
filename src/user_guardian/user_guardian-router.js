@@ -37,7 +37,6 @@ userguardianRouter
             }
         }
 
-        newUserGuardian.userid = userid
         UserGuardianServices.insertUserGuardian(
             req.app.get('db'),
             newUserGuardian
@@ -56,11 +55,9 @@ userguardianRouter
     .route('/:userguardiansid')
 
     .all((req, res, next) => {
-        UserGuardianServices.getById(
-            req.app.get('db'),
-            req.params.userguardiansid
-        )
+        UserGuardianServices.getById(req.app.get('db'), req.params.userguardiansid)
             .then(userguardian => {
+                console.log(userguardian);
                 if (!userguardian) {
                     return res.status(404).json({
                         error: { message: `User Guardian link doesn't exist` }
