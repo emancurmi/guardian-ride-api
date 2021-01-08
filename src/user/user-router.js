@@ -48,8 +48,7 @@ userRouter
 
         UserServices.getByUserPhoneOnly(req.app.get('db'), newUser.userphone)
             .then(user => {
-                console.log(user.length);
-                if (user === 0) {
+                if (user.length === 0) {
                     UserServices.insertUser(req.app.get('db'), newUser)
                         .then(user => {
                             res
