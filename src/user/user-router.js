@@ -117,7 +117,7 @@ userRouter
                 }
             })
         }
-        if (req.params.userid !== 1) {
+        if (req.params.userid != 1) {
             UserServices.updateUser(
                 req.app.get('db'),
                 req.params.userid,
