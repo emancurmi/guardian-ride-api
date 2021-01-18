@@ -117,16 +117,24 @@ userRouter
                 }
             })
         }
-
-        UserServices.updateUser(
-            req.app.get('db'),
-            req.params.userid,
-            userToUpdate
-        )
-            .then(numRowsAffected => {
-                res.status(200).json({})
+        if (req.params.userid !== 1) {
+            UserServices.updateUser(
+                req.app.get('db'),
+                req.params.userid,
+                userToUpdate
+            )
+                .then(numRowsAffected => {
+                    res.status(200).json({})
+                })
+                .catch(next)
+        }
+        else {
+            return res.status(400).json({
+                error: {
+                    message: "User is a Demo User"
+                }
             })
-            .catch(next)
+        }
     })
 
 module.exports = userRouter
